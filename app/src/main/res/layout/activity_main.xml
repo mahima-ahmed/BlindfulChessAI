@@ -1,0 +1,262 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#64786e"
+    android:fitsSystemWindows="true">
+
+    <!-- PANTALLA 1: BIENVENIDA -->
+    <LinearLayout
+        android:id="@+id/layoutInicio"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#55624a"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:padding="24dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/press_start_2p"
+            android:text="Bienvenido/a"
+            android:textColor="#e3daa1"
+            android:textSize="14sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:fontFamily="@font/press_start_2p"
+            android:gravity="center"
+            android:lineSpacingExtra="8dp"
+            android:text="BLINDFULCHESS AI"
+            android:textColor="#fbd569"
+            android:textSize="24sp" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btnComenzar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="80dp"
+            android:background="@drawable/bg_pixel_button"
+            android:fontFamily="@font/press_start_2p"
+            android:paddingHorizontal="32dp"
+            android:paddingVertical="18dp"
+            android:text="COMENZAR"
+            android:textColor="#55624a"
+            android:textSize="14sp"
+            app:backgroundTint="@null" />
+    </LinearLayout>
+
+    <!-- PANTALLA 2: ANÁLISIS -->
+    <LinearLayout
+        android:id="@+id/layoutAnalisis"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#55624a"
+        android:orientation="vertical"
+        android:padding="20dp"
+        android:visibility="gone">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:accessibilityHeading="true"
+            android:fontFamily="@font/press_start_2p"
+            android:gravity="center"
+            android:text="BLINDFULCHESS AI"
+            android:textColor="#fbd569"
+            android:textSize="16sp" />
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginVertical="16dp"
+            android:layout_weight="1"
+            android:background="#4F6157">
+
+            <ImageView
+                android:id="@+id/imgTablero"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:contentDescription="Imagen seleccionada para analizar"
+                android:padding="8dp"
+                android:scaleType="fitCenter" />
+
+            <TextView
+                android:id="@+id/txtPlaceholder"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:fontFamily="@font/press_start_2p"
+                android:gravity="center"
+                android:lineSpacingExtra="6dp"
+                android:text="ADJUNTA O\nESCANEA UNA\nIMAGEN"
+                android:textColor="#55624a"
+                android:textSize="11sp" />
+
+            <ProgressBar
+                android:id="@+id/progreso"
+                style="?android:attr/progressBarStyleLarge"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:visibility="gone" />
+        </FrameLayout>
+
+        <!-- MODO 1: elegir imagen y analizar -->
+        <LinearLayout
+            android:id="@+id/layoutSeleccion"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btnGaleria"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="8dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/bg_pixel_button"
+                    android:contentDescription="Adjuntar imagen de la galería"
+                    android:fontFamily="@font/press_start_2p"
+                    android:paddingVertical="14dp"
+                    android:text="ADJUNTAR"
+                    android:textColor="#55624a"
+                    android:textSize="10sp"
+                    app:backgroundTint="@null" />
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btnCamara"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/bg_pixel_button"
+                    android:contentDescription="Hacer una foto con la cámara"
+                    android:fontFamily="@font/press_start_2p"
+                    android:paddingVertical="14dp"
+                    android:text="CÁMARA"
+                    android:textColor="#55624a"
+                    android:textSize="10sp"
+                    app:backgroundTint="@null" />
+            </LinearLayout>
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btnDescribir"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="14dp"
+                android:background="@drawable/bg_pixel_button"
+                android:contentDescription="Describir el diagrama con inteligencia artificial"
+                android:fontFamily="@font/press_start_2p"
+                android:paddingVertical="18dp"
+                android:text="DESCRIBIR DIAGRAMA"
+                android:textColor="#55624a"
+                android:textSize="11sp"
+                app:backgroundTint="@null" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btnAjedrez"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/bg_pixel_button"
+                android:contentDescription="Modo extra: clasificar tablero de ajedrez"
+                android:fontFamily="@font/press_start_2p"
+                android:paddingVertical="12dp"
+                android:text="MODO AJEDREZ"
+                android:textColor="#55624a"
+                android:textSize="9sp"
+                app:backgroundTint="@null" />
+        </LinearLayout>
+
+        <!-- MODO 2: resultado -->
+        <LinearLayout
+            android:id="@+id/layoutResultado"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:visibility="gone">
+
+            <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:background="#a3966a">
+
+                <TextView
+                    android:id="@+id/txtResultado"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:accessibilityLiveRegion="polite"
+                    android:lineSpacingExtra="4dp"
+                    android:padding="16dp"
+                    android:textColor="#1e2a20"
+                    android:textIsSelectable="true"
+                    android:textSize="16sp" />
+            </ScrollView>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:orientation="horizontal">
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btnEscuchar"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="8dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/bg_pixel_button"
+                    android:contentDescription="Escuchar la descripción en voz alta"
+                    android:fontFamily="@font/press_start_2p"
+                    android:paddingVertical="14dp"
+                    android:text="ESCUCHAR"
+                    android:textColor="#55624a"
+                    android:textSize="10sp"
+                    app:backgroundTint="@null" />
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btnParar"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/bg_pixel_button"
+                    android:contentDescription="Parar el audio"
+                    android:fontFamily="@font/press_start_2p"
+                    android:paddingVertical="14dp"
+                    android:text="PARAR"
+                    android:textColor="#55624a"
+                    android:textSize="10sp"
+                    app:backgroundTint="@null" />
+            </LinearLayout>
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btnNueva"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:background="@drawable/bg_pixel_button"
+                android:contentDescription="Empezar con una imagen nueva"
+                android:fontFamily="@font/press_start_2p"
+                android:paddingVertical="14dp"
+                android:text="NUEVA IMAGEN"
+                android:textColor="#55624a"
+                android:textSize="10sp"
+                app:backgroundTint="@null" />
+        </LinearLayout>
+    </LinearLayout>
+
+</FrameLayout>

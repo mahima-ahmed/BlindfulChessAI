@@ -1,0 +1,3 @@
+0 tablero_vacío
+1 apertura_partida
+2 final_partida
