@@ -1,34 +1,46 @@
 # ♟️ BlindfulChess AI
 
-**BlindfulChess AI** is an Android application that combines **artificial intelligence, computer vision, and voice-based interaction** to analyze chess boards and provide accessible feedback.
+**BlindfulChess AI** is an Android application that combines **artificial intelligence, computer vision, and voice-based interaction** to analyze chess boards and provide accessible feedback for blind and visually impaired users.
 
-The project was developed as part of an **AWS Hackathon**, with a focus on exploring how AI and mobile technology can be combined to create a more accessible chess experience.
+The project was developed as part of an **AWS Hackathon**, with the goal of exploring how AI and mobile technology can be combined to create a more accessible chess experience.
 
-The application uses a **TensorFlow Lite machine learning model** to classify chess board images and **Groq** to support AI-powered text and voice interaction.
+The application analyzes chess board images using **TensorFlow Lite** and integrates **Groq** for AI-powered text generation and voice interaction.
 
 ---
 
 ## 📱 About the Project
 
-BlindfulChess AI provides an accessible mobile interface for analyzing chess board images.
+BlindfulChess AI allows users to provide an image of a chess board and receive an AI-generated description of the position.
 
-The completed application can:
+The application supports both:
 
-* Analyze chess board images using a TensorFlow Lite model.
-* Classify the board into different game-state categories.
-* Display the detected category and confidence score.
-* Provide a dedicated Android interface for starting the analysis.
-* Integrate Groq for AI-powered text generation and voice-related functionality.
+* 📁 Selecting an existing image from the device.
+* 📷 Taking a new photograph using the device camera.
 
-The project demonstrates the integration of **machine learning, Android development, and AI APIs** within a single mobile application.
+After analyzing the image, the application can recognize the chess pieces and describe their positions on the board, allowing users to understand the chess position through audio-based interaction.
+
+### Key capabilities
+
+* Analyze chess board images using artificial intelligence.
+* Upload an existing chess board image from the device.
+* Take a photograph of a chess board directly with the mobile camera.
+* Recognize chess pieces from the provided image.
+* Identify the positions of the detected pieces on the chess board.
+* Generate a description of the analyzed chess position.
+* Provide AI-powered voice interaction and feedback.
+* Display the detected information and model confidence.
+
+The project was designed with **accessibility as a central consideration**, particularly for blind and visually impaired users who cannot directly view a physical chess board.
 
 ---
 
 ## 🧠 Artificial Intelligence
 
+The project uses machine learning and image analysis to interpret chess board images.
+
 The image classification model was created and trained using **Google Teachable Machine** and exported as a TensorFlow Lite model.
 
-The model recognizes three categories:
+The current classification model recognizes three game-state categories:
 
 ```text
 tablero_vacio
@@ -36,25 +48,25 @@ apertura_partida
 final_partida
 ```
 
-The image-processing workflow is:
+The image-analysis workflow is:
 
 ```text
 Chess board image
         ↓
 Image preprocessing
         ↓
-Resize to 224 × 224
-        ↓
 TensorFlow Lite model
         ↓
-Prediction probabilities
+Image classification / recognition
         ↓
-Highest-confidence class
+Chess board information
         ↓
-Result displayed in the app
+AI-generated description
+        ↓
+Voice-based feedback
 ```
 
-The model is included in the project under:
+The TensorFlow Lite model is included in:
 
 ```text
 app/src/main/assets/model_unquant.tflite
@@ -68,15 +80,37 @@ app/src/main/assets/labels.txt
 
 ---
 
+## ♟️ Chess Board Recognition
+
+One of the main features of BlindfulChess AI is its ability to analyze the content of a chess board image.
+
+Depending on the provided image, the application can identify the chess pieces and their positions on the board and generate a description of the resulting position.
+
+For example, the system can provide information about:
+
+```text
+White pieces
+Black pieces
+Piece type
+Piece position
+Current board configuration
+```
+
+This information can then be presented through the application's AI-powered interaction, helping a blind or visually impaired user understand the board without needing to see it.
+
+---
+
 ## 🗣️ Groq Integration
 
-BlindfulChess AI also integrates the **Groq API** for AI-powered text generation and voice-related functionality.
+BlindfulChess AI integrates the **Groq API** to support AI-powered text generation and voice-related functionality.
+
+The AI-generated information can be transformed into a form that is easier to understand through spoken feedback.
 
 ### API Key Setup
 
 For security reasons, **never publish a real Groq API key in the repository**.
 
-The configuration file should contain:
+The configuration file should contain a placeholder:
 
 ```kotlin
 object Config {
@@ -97,7 +131,7 @@ To run the project locally, replace the placeholder with your own Groq API key.
 | ---------------------------- | -------------------------------------------------- |
 | **Kotlin**                   | Android application development                    |
 | **Android Studio**           | Development environment                            |
-| **TensorFlow Lite**          | On-device image classification                     |
+| **TensorFlow Lite**          | On-device machine learning and image analysis      |
 | **Google Teachable Machine** | Machine learning model training                    |
 | **Groq API**                 | AI-powered text generation and voice functionality |
 | **Material Components**      | Android user interface                             |
@@ -165,7 +199,7 @@ git clone https://github.com/mahima-ahmed/BlindfulChessAI.git
 
 Open the project in Android Studio and allow Gradle to synchronize the project.
 
-Add your own Groq API key to the local configuration:
+Configure your Groq API key locally:
 
 ```kotlin
 object Config {
@@ -178,37 +212,75 @@ Then build and run the application on an Android emulator or compatible physical
 
 ---
 
-## 🔍 How the Chess Analysis Works
+## 🔍 How the Application Works
 
-When the user starts an analysis, the application:
+The user begins by providing a chess board image.
 
-1. Loads the chess board image.
-2. Resizes it to `224 × 224` pixels.
-3. Converts it into a TensorFlow Lite-compatible tensor.
-4. Runs inference using the bundled model.
-5. Reads the prediction probabilities.
-6. Determines the class with the highest confidence.
-7. Displays the result to the user.
-
-Example:
+The application can use:
 
 ```text
-IA Detecta: apertura_partida (94% de acierto)
+Existing image
+      OR
+Mobile camera photograph
 ```
+
+The image is then processed by the AI system.
+
+The general workflow is:
+
+```text
+User selects or captures an image
+              ↓
+       Image processing
+              ↓
+      AI / ML recognition
+              ↓
+     Chess piece detection
+              ↓
+   Piece position identification
+              ↓
+   Chess board description
+              ↓
+      AI text generation
+              ↓
+       Voice feedback
+```
+
+This allows the user to receive an audio-friendly description of the chess board.
 
 ---
 
-## 🖼️ Current Implementation
+## 🖼️ Image Input
 
-The application includes a test image:
+BlindfulChess AI supports two ways of providing a chess board image:
 
-```text
-test_tablero.jpg
-```
+### 📁 Upload an image
 
-stored in the application's assets and used to demonstrate the complete image-analysis pipeline.
+The user can select an existing photograph or image stored on the device.
 
-The project successfully integrates the trained model with the Android application and displays the resulting classification and confidence score.
+### 📷 Take a photograph
+
+The user can use the mobile device's camera to photograph a physical chess board and submit the image for analysis.
+
+This makes the application usable in different real-world situations without requiring a pre-existing digital image.
+
+---
+
+## 🎯 Accessibility
+
+Accessibility is a central part of the BlindfulChess AI concept.
+
+A traditional chess board is highly visual, which creates a significant barrier for blind users. This project explores how computer vision and voice interaction can transform visual information into accessible descriptions.
+
+The application can provide information about:
+
+* The pieces present on the board.
+* The color of each piece.
+* The position of each piece.
+* The overall configuration of the chess board.
+* A spoken description of the analyzed position.
+
+The goal is to allow users to understand a chess position through **audio rather than relying exclusively on vision**.
 
 ---
 
@@ -219,27 +291,48 @@ BlindfulChess AI was created for an **AWS Hackathon** as a practical exploration
 * Artificial intelligence
 * Computer vision
 * Android development
+* Machine learning
 * Voice interaction
-* Accessibility
-* Machine learning model deployment
+* Accessibility technology
+* AI-assisted chess analysis
 
-The project demonstrates how different AI technologies can be combined into a functional mobile application.
+The project demonstrates how different AI technologies can be combined to build a mobile application focused on accessibility.
 
 ---
 
 ## 🔮 Possible Future Enhancements
 
-Although the hackathon project is complete, the concept could be expanded with additional features such as:
+Although the hackathon project is complete, several features could further improve BlindfulChess AI:
 
-* 📷 Direct camera-based chess board scanning.
-* ♟️ Individual chess piece recognition.
-* 🧩 Automatic reconstruction of a chess position.
-* 🔊 More advanced voice feedback.
-* ♟️ Chess move and position analysis.
-* 📱 Further accessibility and UI improvements.
-* 🤖 Training the model with a larger and more diverse dataset.
+### ⠿ Braille Support
 
-These are potential extensions of the project rather than unfinished features of the current version.
+A future version could support **Braille transcription of chess positions and descriptions**, allowing users with Braille displays or other compatible devices to access the same information through Braille in addition to voice feedback.
+
+### ♟️ More Advanced Chess Analysis
+
+The application could be expanded to provide deeper chess analysis, including:
+
+* Legal move detection.
+* Suggested moves.
+* Position evaluation.
+* FEN generation.
+* Integration with chess engines.
+
+### 🗣️ More Natural Voice Interaction
+
+Future versions could provide a more conversational voice interface, allowing users to ask questions about the detected chess position and receive spoken answers.
+
+### 🤖 Improved Recognition
+
+The recognition model could be trained with a larger and more diverse dataset containing different:
+
+* Chess boards
+* Lighting conditions
+* Camera angles
+* Piece designs
+* Image backgrounds
+
+This could improve the robustness of the recognition system in real-world situations.
 
 ---
 
@@ -252,11 +345,21 @@ Through this project, I gained practical experience with:
 * TensorFlow Lite integration.
 * Image preprocessing for machine learning.
 * Deploying machine learning models on Android.
-* Integrating external AI APIs.
-* AI-powered voice interaction.
+* Computer vision concepts.
+* API integration.
+* AI-powered text and voice interaction.
+* Designing applications with accessibility in mind.
 * Git and GitHub version control.
 * Debugging Android build and dependency issues.
 * Combining multiple technologies into a functional application.
+
+---
+
+## 🏆 AWS Hackathon
+
+**BlindfulChess AI was developed as an AWS Hackathon project.**
+
+The project explores how artificial intelligence and mobile technologies can be applied to improve accessibility in chess and create an alternative way for blind and visually impaired users to understand chess positions.
 
 ---
 
@@ -276,16 +379,16 @@ GitHub: [github.com/mahima-ahmed](https://github.com/mahima-ahmed)
 
 ---
 
-## 🏆 Hackathon Project
-
-**Developed for an AWS Hackathon**
-
-This project was created as part of a hackathon challenge focused on building a functional technology solution using modern cloud, AI, and software development technologies.
-
----
-
 ## ✅ Project Status
 
 **Completed**
 
-BlindfulChess AI is a completed hackathon project demonstrating the integration of an Android application, an on-device TensorFlow Lite model, and AI-powered voice functionality.
+BlindfulChess AI is a completed AWS Hackathon project demonstrating the integration of an Android application, machine learning-based chess board recognition, image and camera input, and AI-powered voice interaction.
+
+The project can serve as a foundation for further development in **accessible chess technology and AI-powered assistive applications**.
+
+---
+
+## 📄 License
+
+No open-source license has been specified yet.
